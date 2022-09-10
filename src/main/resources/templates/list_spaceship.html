@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Űrhajók listázása</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <h1>Űrhajók</h1>
+
+
+    <a href="/list-spaceship" th:if="${filtered=='true'}">Összes űrhajó</a>
+    <a href="/list-spaceship?isActive=true" th:if="${!filtered}">Aktív űrhajók</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Regisztrációs kód</th>
+                <th>Név</th>
+                <th>Űrhejó osztálya</th>
+                <th>Aktív-e</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr data-th-each="spaceship: ${spaceships}">
+                <td data-th-text="${spaceship.registrationCode}"></td>
+                <td data-th-text="${spaceship.name}">></td>
+                <td data-th-text="${spaceship.spaceShipClass}">></td>
+                <td data-th-text="${spaceship.isActive}">></td>
+                <td><a th:href="@{/crew/{code}(code=${spaceship.registrationCode})}">Legénység</a> </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
